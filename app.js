@@ -17,8 +17,8 @@ const hours = [
     "7pm"
   ];
   
-  const seattle = {
-    location: "seattle",
+  const Cookiestand(location, minCust, maxCust, avgCookie){
+  this.location = location;
     minCust: 23,
     maxCust: 65,
     guestEachHour: [],
@@ -258,4 +258,3 @@ const hours = [
         allShops[i].render();
       }
     })();
-    
