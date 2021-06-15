@@ -18,7 +18,7 @@ const hours = [
 ];
 
 let everyBookStands = [];
-let newBookstand = document.getElementById('newBookStand');
+let newBookStand = document.getElementById('newBookStand');
 
 function bookStand (location, minCustomer, maxCustomer, avgCookie) {
   this.location = location;
@@ -39,7 +39,7 @@ new bookStand('Lima',2, 16, 4.6);
 
 bookStand.prototype.calcGuestPerhour=function() {
     for (let i = 0; i < hours.length; i++) {
-      this.guestPerHour.push(Math.floor(Math.random() * (this.minCustomer-this.maxCustomer+1)+this.minCustomer));
+      this.guestPerHour.push(Math.floor(Math.random() * (this.maxCustomer-this.minCustomer+1)+this.minCustomer));
     }
  };
 bookStand.prototype.calcCookiesPerHour=function() {
@@ -100,37 +100,37 @@ for (let i = 0; i < everyBookStands.length; i++) {
 }
 }
 
-function totalAtFooter() {
-let bookStandPerHour = [];
-for(let i = 0; i < hours.length; i++) {
-  let totalCookiesPerHour = 0;
-  for(let j = 0; j < everyBookStands.length; j++) {
-    totalCookiesPerHour += everyBookStands[j].cookiesPerHour[i];
- }
-bookStandPerHour.push(totalCookiesPerHour);
-}
-let footData = document.getElementById('t-body');
-let trEl = document.createElement('tr');
-trEl.id = 'total-row';
-let tdEl = document.createElement('td');
-tdEl.textContent = 'Total';
-trEl.appendChild(tdEl);
-  for(let i = 0; i < hours.length; i++) {
-    tdEl = document.createElement('td');
-    tdEl.textContent = bookStandPerHour[i];
-    trEl.appendChild(tdEl);
-}
-let totalEveryStands = 0;
-for (let i = 0; i < hours.length; i++) {
-totalEveryStands = bookStandPerHour
-}
-tdEl = document.createElement('td');
-tdEl.textContent = totalEveryStands;
-trEl.appendChild(tdEl);
+// function totalAtFooter() {
+// let bookStandPerHour = [];
+// for(let i = 0; i < hours.length; i++) {
+//   let totalCookiesPerHour = 0;
+//   for(let j = 0; j < everyBookStands.length; j++) {
+//     totalCookiesPerHour += everyBookStands[j].cookiesPerHour[i];
+//  }
+//   bookStandPerHour.push(totalCookiesPerHour);
+// }
+// let footData = document.getElementById('t-body');
+// let trEl = document.createElement('tr');
+// trEl.id = 'total-row';
+// let tdEl = document.createElement('td');
+// tdEl.textContent = 'Total';
+// trEl.appendChild(tdEl);
+//   for(let i = 0; i < hours.length; i++) {
+//     tdEl = document.createElement('td');
+//     tdEl.textContent = bookStandPerHour[i];
+//     trEl.appendChild(tdEl);
+// }
+// let totalEveryStands = 0;
+// for(let i = 0; i < hours.length; i++) {
+// totalEveryStands = bookStandPerHour
+// }
+// tdEl = document.createElement('td');
+// tdEl.textContent = totalEveryStands;
+// trEl.appendChild(tdEl);
 
-footData.appendChild(trEl);
+// footData.appendChild(trEl);
 
-}
+// }
 
 
 newBookStand.addEventListener('submit', handleNewCookieStand);
@@ -138,19 +138,19 @@ function handleNewCookieStand(event) {
     event.preventDefault();
 
 
-let newCookieStandName = event.target.location.value;
+let newLocation = event.target.location.value;
 let newMinCustomer = event.target.minCustomer.value;
 let newMaxCustomer = event.target.maxCustomer.value;
 let newAvgCookie = event.target.avgCookie.value;
-let newInput = new bookStand(newMinCustomer, newMaxCustomer, newCookieStandName,newAvgCookie);
+let newInput = new bookStand(newLocation, newMinCustomer, newMaxCustomer, newAvgCookie);
 
 event.target.location.value = null;
-event.target.maxCustomer.value = null;
+event.target.minCustomer.value = null;
 event.target.maxCustomer.value = null;
 event.target.avgCookie.value = null;
 
 newInput.render();
-totalAtFooter();
+// totalAtFooter();
 dupRow();
 }
 
